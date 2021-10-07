@@ -35,9 +35,9 @@ const StyledInputArea = styled.div`
 `;
 
 const StyledInput = styled.input`
-  background-color: rgba(0, 0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.2);
   border: 3px solid #3d2c8d;
-  color: #916bbf;
+  color: white;
   border-radius: 20px 0 0 20px;
   font-size: 1.2rem;
   height: 100%;
@@ -54,21 +54,33 @@ export default function SearchArea({ searchAnime, searchAnimeByGenere }) {
   const [searchText, setSearchText] = useState("");
 
   const updateSearchText = (e) => {
-    const newSearchText = e.target.value;
-    setSearchText(newSearchText);
+    setSearchText(e.target.value);
   };
 
   return (
     <StyledInputArea>
       <h1>Search Animes</h1>
       <div>
-        <StyledInput type="text" onChange={updateSearchText} />
-        <button type="button" onClick={() => searchAnime(searchText)}>
+        <StyledInput
+          type="text"
+          onChange={updateSearchText}
+          value={searchText}
+        />
+        <button
+          type="button"
+          onClick={() => {
+            searchAnime(searchText);
+            setSearchText("");
+          }}
+        >
           Search
         </button>
         <EndButton
           type="button"
-          onClick={() => searchAnimeByGenere(searchText)}
+          onClick={() => {
+            searchAnimeByGenere(searchText);
+            setSearchText("");
+          }}
         >
           Search by Genere
         </EndButton>

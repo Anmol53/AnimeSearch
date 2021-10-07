@@ -17,17 +17,18 @@ export default function Home({ user }) {
   const [searchedMessage, setSearchedMessage] = useState("");
 
   const searchAnime = (text) => {
+    setSearchedMessage(`for '${text}'`);
     fetch(`${BaseURL}?title=${text}&nsfw=true`)
       .then((r) => r.json())
       .then((r) => {
         if (r.status_code === 200) {
           setAnimes(r.data.documents);
-          setSearchedMessage(`for '${text}'`);
         }
       });
   };
 
   const searchAnimeByGenere = (text) => {
+    setSearchedMessage(`for '${text}' genere`);
     if (text !== "") {
       fetch(`${BaseURL}?nsfw=true`)
         .then((r) => r.json())
@@ -37,11 +38,12 @@ export default function Home({ user }) {
               doc.genres.includes(text)
             );
             setAnimes(genreResult);
-            setSearchedMessage(`for '${text}' genere`);
           }
         });
     }
   };
+
+  const viewReviews = (id) => {};
 
   useEffect(() => {
     setAnimeCount(animes.length);
@@ -58,6 +60,7 @@ export default function Home({ user }) {
         <SearchResult
           animes={animes}
           searchAnimeByGenere={searchAnimeByGenere}
+          viewReviews={viewReviews}
         />
       )}
     </HomeContainer>

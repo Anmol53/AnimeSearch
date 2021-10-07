@@ -49,13 +49,34 @@ const Badge = styled.li`
   padding: 0.2rem 0.5rem;
   border: 2px solid black;
   border-radius: 10px;
-  margin: 2px 5px;
+  margin: 2px 5px 2px 0px;
   font-size: 0.7rem;
   font-weight: 700;
   cursor: pointer;
 `;
 
+const StyledButton = styled.button`
+  outline: none;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  margin: 1rem 0;
+  padding: 0.5rem 1rem;
+  background-color: #3d2c8d;
+  color: white;
+  font-weight: 600;
+
+  &:hover {
+    background-color: #916bbf;
+  }
+
+  &:active {
+    background-color: #c996cc;
+  }
+`;
+
 export default function Card({
+  id,
   title,
   trailer_url,
   genres,
@@ -64,7 +85,8 @@ export default function Card({
   season_year,
   episodes_count,
   image_url,
-  searchAnimeByGenere
+  searchAnimeByGenere,
+  viewReviews
 }) {
   const Rating = styled.span`
     background: linear-gradient(
@@ -120,6 +142,9 @@ export default function Card({
             );
           })}
         </ul>
+        <StyledButton type="button" onClick={() => viewReviews(id)}>
+          View Reviews
+        </StyledButton>
       </DiluteBackground>
     </StyledCard>
   );

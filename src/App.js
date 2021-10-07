@@ -1,7 +1,34 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import styled from "styled-components";
 import Home from "./Home";
 import Login from "./Login";
 import Signup from "./Signup";
+
+const LogoutButton = styled.div`
+  padding: 0.2rem 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row-reverse;
+
+  button {
+    outline: none;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    background-color: #ff2e63;
+    color: black;
+    font-weight: 600;
+  }
+
+  button:hover {
+    background-color: #ff0040;
+  }
+
+  button:active {
+    background-color: #ff4d79;
+  }
+`;
 
 export default function App() {
   const [loggedUser, setLoggedUser] = useState(undefined);
@@ -60,10 +87,25 @@ export default function App() {
       });
   };
 
+  const logout = () => {
+    fetch(`${serverURL}/logout`, { credentials: "include" }).then((r) => {
+      if (r.ok) {
+        setLoggedUser(undefined);
+      }
+    });
+  };
+
+  useEffect(() => {
+    getUserDetail();
+  }, []);
+
   return (
     <div>
-      {/* <Home /> */}
-      {loginForm ? (
+      {loggedUser ? (
+        <LogoutButton>
+          <button onClick={logout}>Logout</button>
+        </LogoutButton>
+      ) : loginForm ? (
         <Login
           loginHandler={loginSignupHandler}
           error={error}
@@ -75,7 +117,7 @@ export default function App() {
           error={error}
           formToggler={setLoginForm}
         />
-      )}{" "}
+      )}
     </div>
   );
 }

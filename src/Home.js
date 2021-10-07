@@ -9,7 +9,7 @@ const HomeContainer = styled.div`
   gap: 1rem;
 `;
 
-export default function Card() {
+export default function Home({ user }) {
   const BaseURL = "https://api.aniapi.com/v1/anime";
 
   const [animes, setAnimes] = useState([]);

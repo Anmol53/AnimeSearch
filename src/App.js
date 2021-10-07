@@ -106,11 +106,14 @@ export default function App() {
   return (
     <div>
       {loggedUser ? (
-        <UserInfo>
-          <span></span>
-          <p>Hi {loggedUser.user_name}!</p>
-          <button onClick={logout}>Logout</button>
-        </UserInfo>
+        <>
+          <UserInfo>
+            <span></span>
+            <p>Hi {loggedUser.user_name}!</p>
+            <button onClick={logout}>Logout</button>
+          </UserInfo>
+          <Home user={loggedUser} />
+        </>
       ) : loginForm ? (
         <Login
           loginHandler={loginSignupHandler}

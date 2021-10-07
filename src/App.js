@@ -37,6 +37,7 @@ export default function App() {
     // Try Login Here
     fetch(`${serverURL}/${endpoint}`, {
       method: "post",
+      mode: "no-cors",
       body: JSON.stringify(cred),
       headers: {
         "Content-Type": "application/json"

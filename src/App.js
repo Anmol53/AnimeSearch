@@ -4,11 +4,15 @@ import Home from "./Home";
 import Login from "./Login";
 import Signup from "./Signup";
 
-const LogoutButton = styled.div`
+const UserInfo = styled.div`
   padding: 0.2rem 0.5rem;
   display: flex;
   justify-content: space-between;
-  flex-direction: row-reverse;
+
+  p {
+    color: #1c0c5b;
+    font-size: 1.2rem;
+  }
 
   button {
     outline: none;
@@ -16,8 +20,8 @@ const LogoutButton = styled.div`
     border-radius: 10px;
     cursor: pointer;
     padding: 0.5rem 1rem;
-    background-color: #ff2e63;
-    color: black;
+    background-color: #916bbf;
+    color: white;
     font-weight: 600;
   }
 
@@ -102,9 +106,11 @@ export default function App() {
   return (
     <div>
       {loggedUser ? (
-        <LogoutButton>
+        <UserInfo>
+          <span></span>
+          <p>Hi {loggedUser.user_name}!</p>
           <button onClick={logout}>Logout</button>
-        </LogoutButton>
+        </UserInfo>
       ) : loginForm ? (
         <Login
           loginHandler={loginSignupHandler}

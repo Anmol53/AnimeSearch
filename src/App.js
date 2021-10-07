@@ -33,6 +33,7 @@ export default function App() {
 
   const loginSignupHandler = (endpoint, cred) => {
     // Try Login Here
+    setError(undefined);
     fetch(`${serverURL}/${endpoint}`, {
       method: "post",
       body: JSON.stringify(cred),

@@ -9,7 +9,6 @@ const StyledCard = styled.div`
   border-radius: 20px;
   box-shadow: 2px 2px 20px 2px rgba(0, 0, 0, 0.25),
     -2px -2px 20px 2px rgba(0, 0, 0, 0.22);
-  cursor: pointer;
   transition: 0.4s;
   background-position: center;
   background-size: cover;
@@ -53,6 +52,7 @@ const Badge = styled.li`
   margin: 2px 5px;
   font-size: 0.7rem;
   font-weight: 700;
+  cursor: pointer;
 `;
 
 export default function Card({
@@ -63,7 +63,8 @@ export default function Card({
   rating,
   season_year,
   episodes_count,
-  image_url
+  image_url,
+  searchAnimeByGenere
 }) {
   const Rating = styled.span`
     background: linear-gradient(
@@ -114,7 +115,7 @@ export default function Card({
                   color: `#${randomColor}`
                 }}
               >
-                {genre}
+                <span onClick={() => searchAnimeByGenere(genre)}>{genre}</span>
               </Badge>
             );
           })}

@@ -14,6 +14,7 @@ export default function Home({ user }) {
 
   const [animes, setAnimes] = useState([]);
   const [animeCount, setAnimeCount] = useState(0);
+  const [searchedMessage, setSearchedMessage] = useState("");
 
   const searchAnime = (text) => {
     fetch(`${BaseURL}?title=${text}&nsfw=true`)
@@ -21,6 +22,7 @@ export default function Home({ user }) {
       .then((r) => {
         if (r.status_code === 200) {
           setAnimes(r.data.documents);
+          setSearchedMessage(`for '${text}'`);
         }
       });
   };
@@ -35,6 +37,7 @@ export default function Home({ user }) {
               doc.genres.includes(text)
             );
             setAnimes(genreResult);
+            setSearchedMessage(`for '${text}' genere`);
           }
         });
     }
@@ -50,8 +53,13 @@ export default function Home({ user }) {
         searchAnime={searchAnime}
         searchAnimeByGenere={searchAnimeByGenere}
       />
-      Showing {animeCount} animes
-      {animeCount > 0 && <SearchResult animes={animes} />}
+      Showing {animeCount} animes {searchedMessage}
+      {animeCount > 0 && (
+        <SearchResult
+          animes={animes}
+          searchAnimeByGenere={searchAnimeByGenere}
+        />
+      )}
     </HomeContainer>
   );
 }

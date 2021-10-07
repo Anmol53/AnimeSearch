@@ -9,7 +9,7 @@ const ResultArea = styled.ul`
   grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
 `;
 
-export default function SearchResult({ animes }) {
+export default function SearchResult({ animes, searchAnimeByGenere }) {
   return (
     <ResultArea>
       {animes.map((anime) => (
@@ -23,6 +23,7 @@ export default function SearchResult({ animes }) {
             season_year={anime.season_year || "Not available"}
             episodes_count={anime.episodes_count || "Not available"}
             image_url={anime.banner_image}
+            searchAnimeByGenere={searchAnimeByGenere}
           />
         </li>
       ))}

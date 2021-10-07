@@ -5,12 +5,19 @@ const StyledCard = styled.div`
   background-color: #1c0c5b;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
   margin: 1rem auto;
-  max-width: 500px;
-  min-width: 50%;
-  padding: 2rem;
+  min-width: 300px;
+  max-width: 690px;
+  width: 50%;
+  padding: 1rem;
   color: white;
-  h1 {
+  .heading {
     text-align: center;
+    background-color: #c996cc;
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin: 0 -1rem;
+    padding: 0.7rem 0;
   }
 `;
 
@@ -53,23 +60,28 @@ const StyledForm = styled.form`
     background-color: #916bbf;
     color: white;
     outline: none;
-    /* margin:  ; */
     padding: 0.4rem 1.2rem;
     cursor: pointer;
     place-self: center;
   }
-  button.opposite {
-    background-color: rgba(0, 0, 0, 0);
+
+  .action {
+    display: grid;
+    grid-column: 1fr;
+    justify-content: center;
+    row-gap: 0.5rem;
+  }
+
+  .error {
+    text-align: center;
+    color: red;
+  }
+
+  .switch-form span {
     padding: 0 0.5rem;
     color: #916bbf;
     text-decoration: underline;
-  }
-  .double-column {
-    grid-column: 1/3;
-    text-align: center;
-  }
-  .error {
-    color: red;
+    cursor: pointer;
   }
 `;
 
@@ -118,11 +130,8 @@ export default function Signup(props) {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         ></input>
-        {props.error && (
-          <div className="error double-column">{props.error}</div>
-        )}
-        <div className="double-column">
-          {" "}
+        <div className="error double-column">{props.error}</div>
+        <div className="action">
           <button
             type="button"
             onClick={() =>
@@ -137,17 +146,11 @@ export default function Signup(props) {
           >
             Sign Up
           </button>
+          <p className="switch-form">
+            Already User?
+            <span onClick={() => props.formToggler(true)}>Login here</span>
+          </p>
         </div>
-        <div className="double-column">
-          Already User?
-          <button
-            className="opposite"
-            type="button"
-            onClick={() => props.formToggler(true)}
-          >
-            Login here
-          </button>
-        </div>{" "}
       </StyledForm>
     </StyledCard>
   );

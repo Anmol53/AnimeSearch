@@ -4,13 +4,57 @@ import Anime from "./Anime";
 import SearchArea from "./SearchArea";
 import SearchResult from "./SearchResult";
 
+const UserInfo = styled.div`
+  background-color: rgba(0, 0, 0, 0.3);
+  padding: 0.2rem 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  p {
+    color: #1c0c5b;
+    font-size: 1.2rem;
+  }
+
+  button {
+    outline: none;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    background-color: #916bbf;
+    color: white;
+    font-weight: 600;
+  }
+
+  button:hover:enabled {
+    background-color: #ff0040;
+  }
+
+  button:active:enabled {
+    background-color: #ff4d79;
+  }
+
+  button.back {
+    transform: rotateY(180deg);
+    padding: 0 0.5rem;
+    font-size: 1.5rem;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+  }
+  button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+`;
+
 const HomeContainer = styled.div`
   padding: 1rem;
   display: grid;
   gap: 1rem;
 `;
 
-export default function Home({ user }) {
+export default function Home({ user, logout }) {
   const BaseURL = "https://api.aniapi.com/v1/anime";
   const serverURL = "https://anime-search-backend.herokuapp.com";
 
@@ -87,27 +131,43 @@ export default function Home({ user }) {
   }, [animes]);
 
   return (
-    <HomeContainer>
-      <SearchArea
-        searchAnime={searchAnime}
-        searchAnimeByGenere={searchAnimeByGenere}
-      />
-      {viewingAnime ? (
-        <Anime anime={viewingAnime} />
-      ) : (
-        <>
-          <p>
-            Showing {animeCount} animes {searchedMessage}
-          </p>
-          {animeCount > 0 && (
-            <SearchResult
-              animes={animes}
+    <>
+      <UserInfo>
+        <button
+          className="back"
+          onClick={() => {
+            setViewingAnime(undefined);
+          }}
+          disabled={!viewingAnime}
+        >
+          ➤
+        </button>
+        <p>Hi {user.user_name}!</p>
+        <button onClick={logout}>Logout</button>
+      </UserInfo>
+
+      <HomeContainer>
+        {viewingAnime ? (
+          <Anime anime={viewingAnime} />
+        ) : (
+          <>
+            <SearchArea
+              searchAnime={searchAnime}
               searchAnimeByGenere={searchAnimeByGenere}
-              viewReviews={viewReviews}
             />
-          )}
-        </>
-      )}
-    </HomeContainer>
+            <p>
+              Showing {animeCount} animes {searchedMessage}
+            </p>
+            {animeCount > 0 && (
+              <SearchResult
+                animes={animes}
+                searchAnimeByGenere={searchAnimeByGenere}
+                viewReviews={viewReviews}
+              />
+            )}
+          </>
+        )}
+      </HomeContainer>
+    </>
   );
 }

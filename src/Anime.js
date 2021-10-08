@@ -80,7 +80,7 @@ export default function Anime({ anime }) {
   return (
     <StyledContainer>
       <AboutContainer>
-        <img src={anime.banner_image} alt={`Banner for ${anime.title}`} />
+        <img src={anime.image_url} alt={`Banner for ${anime.title}`} />
         <h1>{anime.title}</h1>
         <p>{anime.description}</p>
         <TrailerButton
@@ -123,7 +123,7 @@ export default function Anime({ anime }) {
       </AboutContainer>
       <ReviewsContainer>
         <ul>
-          {anime.reviews.map((review, idx) => (
+          {currReviews.map((review, idx) => (
             <li>
               <h2>{review.user_name}</h2>
               <p>{review.description}</p>

@@ -1,38 +1,7 @@
 import { useEffect, useState } from "react";
-import styled from "styled-components";
 import Home from "./Home";
 import Login from "./Login";
 import Signup from "./Signup";
-
-const UserInfo = styled.div`
-  padding: 0.2rem 0.5rem;
-  display: flex;
-  justify-content: space-between;
-
-  p {
-    color: #1c0c5b;
-    font-size: 1.2rem;
-  }
-
-  button {
-    outline: none;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    padding: 0.5rem 1rem;
-    background-color: #916bbf;
-    color: white;
-    font-weight: 600;
-  }
-
-  button:hover {
-    background-color: #ff0040;
-  }
-
-  button:active {
-    background-color: #ff4d79;
-  }
-`;
 
 export default function App() {
   const [loggedUser, setLoggedUser] = useState(undefined);
@@ -107,12 +76,7 @@ export default function App() {
     <div>
       {loggedUser ? (
         <>
-          <UserInfo>
-            <span></span>
-            <p>Hi {loggedUser.user_name}!</p>
-            <button onClick={logout}>Logout</button>
-          </UserInfo>
-          <Home user={loggedUser} />
+          <Home user={loggedUser} logout={logout} />
         </>
       ) : loginForm ? (
         <Login

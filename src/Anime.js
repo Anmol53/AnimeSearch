@@ -18,19 +18,19 @@ const AboutContainer = styled.div`
 const ReviewsContainer = styled.div`
   padding: 2rem 1rem;
   h1 {
-    font-size: 0.9rem;
+    font-size: 1.2rem;
     color: #1c0c5b;
   }
   ul {
     list-style: none;
   }
   li {
-    padding: 1rem 0.5rem;
+    padding: 0.5rem;
     border: 3px solid #916bbf;
     background-color: white;
     display: flex;
     flex-direction: column;
-    gap: 0.2rem;
+    gap: 1rem;
   }
   h2 {
     font-size: 1.5rem;

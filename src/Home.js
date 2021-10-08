@@ -52,7 +52,7 @@ export default function Home({ user }) {
         fetch(`${serverURL}/anime/${anime.id}`, { credentials: "include" })
           .then((response) => response.json())
           .then((res) => {
-            const sortedReviews = res.todos.sort((a, b) => {
+            const sortedReviews = res.reviews.sort((a, b) => {
               const aDate = new Date(a.creationTime).valueOf();
               const bDate = new Date(b.creationTime).valueOf();
               return aDate - bDate;
@@ -63,7 +63,7 @@ export default function Home({ user }) {
               trailer_url: anime.trailer_url,
               genres: anime.genres,
               description: anime.descriptions.en || "No Description Available",
-              rating: res.rating,
+              rating: res.overallRating,
               season_year: anime.season_year,
               episodes_count: anime.episodes_count,
               image_url: anime.banner_image,

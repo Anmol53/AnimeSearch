@@ -30,7 +30,8 @@ const ReviewsContainer = styled.div`
     background-color: white;
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 0.2rem;
+    margin: 0.5rem 0;
   }
   h2 {
     font-size: 1.5rem;

@@ -75,23 +75,11 @@ const StyledButton = styled.button`
   }
 `;
 
-export default function Card({
-  id,
-  title,
-  trailer_url,
-  genres,
-  description,
-  rating,
-  season_year,
-  episodes_count,
-  image_url,
-  searchAnimeByGenere,
-  viewReviews
-}) {
+export default function Card({ anime, searchAnimeByGenere, viewReviews }) {
   const Rating = styled.span`
     background: linear-gradient(
       90deg,
-      yellow ${rating * 20}%,
+      yellow ${anime.rating * 20}%,
       rgba(255, 255, 255, 0.3) 1%
     );
     background-clip: text;
@@ -100,30 +88,30 @@ export default function Card({
     -webkit-text-fill-color: transparent;
   `;
 
-  if (description.length > 150) {
-    description = description.substring(0, 150) + "...";
+  if (anime.description.length > 150) {
+    anime.description = anime.description.substring(0, 150) + "...";
   }
   return (
-    <StyledCard style={{ backgroundImage: `url(${image_url})` }}>
+    <StyledCard style={{ backgroundImage: `url(${anime.image_url})` }}>
       <DiluteBackground>
-        <h1>{title}</h1>
-        <p>{description}</p>
+        <h1>{anime.title}</h1>
+        <p>{anime.description}</p>
         <TrailerButton
-          href={trailer_url}
+          href={anime.trailer_url}
           target="_blank"
-          className={!trailer_url && "disabled"}
-          title={trailer_url ? "Open Trailer" : "Trailer not available"}
+          className={!anime.trailer_url && "disabled"}
+          title={anime.trailer_url ? "Open Trailer" : "Trailer not available"}
         >
           Trailer Link
         </TrailerButton>
         <p>
           Rating:<Rating>★★★★★</Rating>
         </p>
-        <p>Season Year: {season_year}</p>
-        <p>Number of Episodes: {episodes_count}</p>
+        <p>Season Year: {anime.season_year}</p>
+        <p>Number of Episodes: {anime.episodes_count}</p>
         <p>Genres: </p>
         <ul>
-          {genres.map((genre, idx) => {
+          {anime.genres.map((genre, idx) => {
             let randomColor = Math.floor(Math.random() * 16777215).toString(16);
             while (randomColor.length < 6) {
               randomColor = 8 + randomColor;
@@ -142,7 +130,7 @@ export default function Card({
             );
           })}
         </ul>
-        <StyledButton type="button" onClick={() => viewReviews(id)}>
+        <StyledButton type="button" onClick={() => viewReviews(anime.id)}>
           View Reviews
         </StyledButton>
       </DiluteBackground>

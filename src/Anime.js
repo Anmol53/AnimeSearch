@@ -47,13 +47,35 @@ export default function Anime({ anime }) {
     -webkit-text-fill-color: transparent;
   `;
 
-  const [reviews, setReviews] = useState([
-    {
-      user_name: "anmol",
-      description: "as svwlm vlakv dasl lkads v",
-      rating: "3"
+  const serverURL = "https://anime-search-backend.herokuapp.com";
+
+  const [newReview, setNewReview] = useState("");
+  const [newRating, setNewRating] = useState(undefined);
+  const [currReviews, setCurrReviews] = useState(anime.reviews);
+
+  // Add Item to List
+  const add = () => {
+    if (newReview !== "" && newRating) {
+      fetch(serverURL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          description: newReview,
+          rating: newRating,
+          anime_id: anime.id
+        }),
+        credentials: "include"
+      })
+        .then((response) => response.json())
+        .then((result) => {
+          const temp = [...currReviews];
+          temp.push(result);
+          setCurrReviews(temp);
+          setNewRating(undefined);
+          setNewReview("");
+        });
     }
-  ]);
+  };
 
   return (
     <StyledContainer>
@@ -101,7 +123,7 @@ export default function Anime({ anime }) {
       </AboutContainer>
       <ReviewsContainer>
         <ul>
-          {reviews.map((review, idx) => (
+          {anime.reviews.map((review, idx) => (
             <li>
               <h2>{review.user_name}</h2>
               <p>{review.description}</p>
@@ -112,10 +134,21 @@ export default function Anime({ anime }) {
       </ReviewsContainer>
       <AddReviewContainer>
         <label>Description</label>
-        <textarea />
+        <textarea
+          onChange={(e) => setNewReview(e.target.value)}
+          value={newReview}
+        />
         <label>Rating</label>
-        <input type="range" min="1" max="5" />
-        <button type="button">Post</button>
+        <input
+          type="number"
+          min="1"
+          max="5"
+          onChange={(e) => setNewRating(e.target.value)}
+          value={newRating}
+        />
+        <button type="button" onClick={add}>
+          Post
+        </button>
       </AddReviewContainer>
     </StyledContainer>
   );

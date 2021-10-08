@@ -3,7 +3,17 @@ import styled from "styled-components";
 import AddReview from "./AddReview";
 
 const StyledContainer = styled.div``;
-const AboutContainer = styled.div``;
+const AboutContainer = styled.div`
+  max-width: 100vw;
+  overflow: hidden;
+  img {
+    max-width: 100%;
+  }
+  ul {
+    width: 90%;
+    max-width: 500px;
+  }
+`;
 const ReviewsContainer = styled.div``;
 
 const TrailerButton = styled.a`

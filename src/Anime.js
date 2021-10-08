@@ -1,10 +1,10 @@
 import { useState } from "react";
 import styled from "styled-components";
+import AddReview from "./AddReview";
 
 const StyledContainer = styled.div``;
 const AboutContainer = styled.div``;
 const ReviewsContainer = styled.div``;
-const AddReviewContainer = styled.div``;
 
 const TrailerButton = styled.a`
   display: inline-block;
@@ -49,12 +49,10 @@ export default function Anime({ anime }) {
 
   const serverURL = "https://anime-search-backend.herokuapp.com";
 
-  const [newReview, setNewReview] = useState("");
-  const [newRating, setNewRating] = useState(undefined);
   const [currReviews, setCurrReviews] = useState(anime.reviews);
 
   // Add Item to List
-  const add = () => {
+  const add = (newReview, newRating) => {
     if (newReview !== "" && newRating) {
       fetch(`${serverURL}/review`, {
         method: "POST",
@@ -71,8 +69,6 @@ export default function Anime({ anime }) {
           const temp = [...currReviews];
           temp.push(result);
           setCurrReviews(temp);
-          setNewRating(undefined);
-          setNewReview("");
         });
     }
   };
@@ -132,24 +128,7 @@ export default function Anime({ anime }) {
           ))}
         </ul>
       </ReviewsContainer>
-      <AddReviewContainer>
-        <label>Description</label>
-        <textarea
-          onChange={(e) => setNewReview(e.target.value)}
-          value={newReview}
-        />
-        <label>Rating</label>
-        <input
-          type="number"
-          min="1"
-          max="5"
-          onChange={(e) => setNewRating(e.target.value)}
-          value={newRating}
-        />
-        <button type="button" onClick={add}>
-          Post
-        </button>
-      </AddReviewContainer>
+      <AddReview post={add} />
     </StyledContainer>
   );
 }

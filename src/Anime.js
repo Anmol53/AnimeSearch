@@ -14,7 +14,31 @@ const AboutContainer = styled.div`
     max-width: 500px;
   }
 `;
-const ReviewsContainer = styled.div``;
+
+const ReviewsContainer = styled.div`
+  ul {
+    list-style: none;
+  }
+  li {
+    padding: 0.2rem 0.5rem;
+    border: 3px solid #916bbf;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+  h2 {
+    font-size: 1.5rem;
+    color: #1c0c5b;
+  }
+  p {
+    color: #3d2c8d;
+    font-size: 1.2rem;
+  }
+  span {
+    color: #916bbf;
+  }
+`;
 
 const TrailerButton = styled.a`
   display: inline-block;
@@ -133,7 +157,7 @@ export default function Anime({ anime }) {
             <li>
               <h2>{review.user_name}</h2>
               <p>{review.description}</p>
-              <p>Rating: {review.rating}</p>
+              <span>Rating: {review.rating}</span>
             </li>
           ))}
         </ul>

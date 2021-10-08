@@ -101,7 +101,7 @@ export default function Anime({ anime }) {
         <p>Score: {anime.score}</p>
         <p>Genres: </p>
         <ul>
-          {anime.generes.map((genre, idx) => {
+          {anime.genres.map((genre, idx) => {
             let randomColor = Math.floor(Math.random() * 16777215).toString(16);
             while (randomColor.length < 6) {
               randomColor = 8 + randomColor;

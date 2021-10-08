@@ -16,11 +16,16 @@ const AboutContainer = styled.div`
 `;
 
 const ReviewsContainer = styled.div`
+  padding: 2rem 1rem;
+  h1 {
+    font-size: 0.9rem;
+    color: #1c0c5b;
+  }
   ul {
     list-style: none;
   }
   li {
-    padding: 0.2rem 0.5rem;
+    padding: 1rem 0.5rem;
     border: 3px solid #916bbf;
     background-color: white;
     display: flex;
@@ -152,6 +157,7 @@ export default function Anime({ anime }) {
         </ul>
       </AboutContainer>
       <ReviewsContainer>
+        <h1>Reviews</h1>
         <ul>
           {currReviews.map((review, idx) => (
             <li>

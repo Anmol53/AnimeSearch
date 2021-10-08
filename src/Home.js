@@ -49,7 +49,7 @@ export default function Home({ user }) {
   async function updateAnimeObject(fetchedAnimes) {
     const updatedAnimes = await Promise.all(
       fetchedAnimes.map((anime, idx) =>
-        fetch(`${serverURL}/anime`, { credentials: "include" })
+        fetch(`${serverURL}/anime/${anime.id}`, { credentials: "include" })
           .then((response) => response.json())
           .then((res) => {
             const sortedReviews = res.todos.sort((a, b) => {
